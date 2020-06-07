@@ -9,7 +9,7 @@ function App() {
 
       <div className="container mt-5">
         <div className="row">
-
+          <Form />
         </div>
       </div>
     </Fragment>

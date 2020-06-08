@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useContext} from 'react';
+import { ModalContext } from '../context/ModalContext';
 
 const Recipe = ({recipe}) => {
+
+    // Destructure context
+    const { saveRecipeId } = useContext(ModalContext);
+
     return ( 
         <div className="col-md-4 mb-3">
             <div className="card">
@@ -16,6 +21,9 @@ const Recipe = ({recipe}) => {
                     <button
                         type="button"
                         className="btn btn-block btn-primary"
+                        onClick={() => {
+                            saveRecipeId(recipe.idDrink)
+                        }}
                     >
                         See Recipe
                     </button>

@@ -5,7 +5,7 @@ import { RecipesContext } from '../context/RecipesContext';
 const Form = () => {
 
     const { categories }  = useContext(CategoriesContext);
-    const { searchRecipes } = useContext(RecipesContext)
+    const { searchRecipes, saveCall } = useContext(RecipesContext)
 
     const [ search, saveSearch] = useState({
         name: '',
@@ -26,6 +26,7 @@ const Form = () => {
             onSubmit={ e => {
                 e.preventDefault();   
                 searchRecipes(search);
+                saveCall(true);
             }}
         >
             <fieldset>

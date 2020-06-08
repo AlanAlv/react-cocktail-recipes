@@ -8,6 +8,7 @@ const ModalProvider = (props) => {
     
     // Provider State
     const [ recipeId, saveRecipeId ] = useState(null);
+    const [ recipe, saveRecipe ] = useState({});
 
     // CallAPI
     useEffect(() => {

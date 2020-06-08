@@ -18,7 +18,14 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
       position: 'absolute',
-      width: 600,
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',  
+      },
+      [theme.breakpoints.up('sm')]: {
+        width: 450,  
+      },
+      maxHeight: 800,
+      overflowY: 'auto',
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
@@ -45,6 +52,25 @@ const Recipe = ({recipe}) => {
     // Destructure context
     const { info, saveRecipeId, saveInfo } = useContext(ModalContext);
 
+    // Shows and formats ingredients
+    const showIngredients = info => {
+        let ingredients = [];
+        for(let i = 1; i < 16; i++){
+            if(info[`strIngredient${i}`]){
+                ingredients.push(
+                    <li
+                        key={i}
+                    >
+                        {info[`strIngredient${i}`]} {info[`strMeasure${i}`]}
+                        
+                    </li>
+                )
+            }
+        }
+        return ingredients;
+
+    }
+
     return ( 
         <div className="col-md-4 mb-3">
             <div className="card">
@@ -53,7 +79,7 @@ const Recipe = ({recipe}) => {
                 </h2>
                 <img 
                     src={recipe.strDrinkThumb} 
-                    alt={`${recipe.strDrink} Image`} 
+                    alt={`${recipe.strDrink}`} 
                     className="card-img-top"
                 />
                 <div className="card-body">
@@ -86,9 +112,13 @@ const Recipe = ({recipe}) => {
                             </p>
                             <img 
                                 src={info.strDrinkThumb} 
-                                alt="" 
+                                alt={`${info.strDrink}`} 
                                 className="img-fluid mt-4"
                             />
+                            <h3>Ingredients</h3>
+                            <ul>
+                                {showIngredients(info)}
+                            </ul>
                         </div>
                     </Modal>
                 </div>

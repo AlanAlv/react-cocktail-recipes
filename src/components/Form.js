@@ -1,11 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CategoriesContext } from '../context/CategoriesContext'
 
 const Form = () => {
 
     const { categories }  = useContext(CategoriesContext);
 
-        console.log(categories);
+    const [ search, saveSearch] = useState({
+        name: '',
+        category: ''
+    });
+
+    // Read form
+    const getRecipeData = e => {
+        saveSearch({
+            ...search,
+            [e.target.name] : e.target.value
+        })
+    }
 
     return ( 
         <form
@@ -21,12 +32,14 @@ const Form = () => {
                         name="name" 
                         className="form-control"
                         placeholder="Search by ingredient"
+                        onChange={getRecipeData}
                     />
                 </div>
                 <div className="col-md-4">
                     <select 
                         className="form-control"
                         name="category"
+                        onChange={getRecipeData}
                     >
                         <option value="">-- Select category --</option>
                         {categories.map(category => (

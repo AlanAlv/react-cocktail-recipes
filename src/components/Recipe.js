@@ -43,7 +43,7 @@ const Recipe = ({recipe}) => {
 
 
     // Destructure context
-    const { saveRecipeId } = useContext(ModalContext);
+    const { info, saveRecipeId, saveInfo } = useContext(ModalContext);
 
     return ( 
         <div className="col-md-4 mb-3">
@@ -71,6 +71,7 @@ const Recipe = ({recipe}) => {
                         open={open}
                         onClose={() => {
                             saveRecipeId(null);
+                            saveInfo({});
                             handleClose();
                         }}
                     >
@@ -78,7 +79,16 @@ const Recipe = ({recipe}) => {
                             style={modalStyle}
                             className={classes.paper}
                         >
-                            <h1>From Modal</h1>
+                            <h2>{info.strDrink}</h2>
+                            <h3 className="mt-4">Instructions</h3>
+                            <p>
+                                {info.strInstructions}
+                            </p>
+                            <img 
+                                src={info.strDrinkThumb} 
+                                alt="" 
+                                className="img-fluid mt-4"
+                            />
                         </div>
                     </Modal>
                 </div>
